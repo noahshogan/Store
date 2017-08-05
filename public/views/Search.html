@@ -1,0 +1,19 @@
+
+<h2>Search</h2>
+<div class="Products-container" ng-controller="searchController as searchCtrl">
+    <div class="Search">
+        <div class="form-group">
+            <label>Search:</label>
+            <input type="text" ng-model="searchCtrl.searchText" name="searchSTR">
+        </div>
+<br>
+            <div class="card card-1"  ng-show="searchCtrl.searchText.length>0" ng-form="prod" ng-repeat="p in searchCtrl.products | orderBy:searchCtrl.orderby:reverse | filter: searchCtrl.searchText |startFrom:searchCtrl.currentPage*searchCtrl.pageSize | limitTo:searchCtrl.pageSize" class="productBox">
+                    {{p.productName}}<br>
+                    <img src="{{p.imgSrc}}" class="smallImg" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+            </div>
+
+
+    </div>
+</div>
+
+

@@ -1,0 +1,28 @@
+
+<h2>Purchase Page</h2>
+<div class="purchase-container" ng-controller="purchaseController as purchaseCtrl">
+    <div class="purchase-form">
+        <ul class="cd-cart-items">
+
+            <div class="card card-1" ng-repeat="p in purchaseCtrl.userService.Cart">
+                <span class="cd-qty">{{p.quantity}}x</span> {{p.productName}}
+                <div class="cd-price">${{p.productPrice}}</div>
+                <img src="{{p.imgSrc}}" class="smallImg" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+                <br>
+                <a ng-href="javascript:void(0)" class="cd-item-remove" ng-click="mainCtrl.removeFromCart(p)">Remove</a>
+                <br><br>
+            </div>
+
+        </ul>
+        <div class="cd-cart-total" >
+            <p>Total : <span>${{purchaseCtrl.userService.totalPrice}}</span></p>
+        </div>
+        <br><br><br>
+        Select Date To Deliver:<input type="date" ng-model="purchaseCtrl.dateSelected"><br/>
+        Enter credit card number:<input type="text" ng-model="purchaseCtrl.creditNum" placeholder="enter credit card number">
+        <br/>
+        <button ng-click="purchaseCtrl.Buy()">Buy</button>
+    </div>
+</div>
+
+

@@ -1,0 +1,50 @@
+
+<h2>recover passWord</h2>
+<div class="recover-container" ng-controller="recoverController as recoverCtrl">
+    <div class="recover-form">
+        <form name="recoverForm" ng-submit="recoverCtrl.recover(recoverForm.$valid)" novalidate>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text"
+                       ng-model="username"
+                       ng-required="true"
+                       class="form-control"
+                       name="usernameInput"
+                       placeholder="Enter Username" required>
+
+            </div>
+            <div class="form-group">
+                <label>What hospital were you born in?</label>
+                <input type="text"
+                       ng-model="ANSWER1"
+                       ng-required="true"
+                       class="form-control"
+                       name="ANSWER1Input"
+                       placeholder="Enter Answer"
+
+                       required>
+            </div>
+            <div class="form-group">
+                <label>What was the name of your first teacher?</label>
+                <input type="text"
+                       ng-model="ANSWER2"
+                       ng-required="true"
+                       class="form-control"
+                       name="ANSWER2Input"
+                       placeholder="Enter Answer"
+                       required>
+            </div>
+
+            <input type="submit"
+                   class="btn btn-success btn-lg"
+                   value="recover password"
+                   ng-disabled="recoverForm.$invalid">
+        </form>
+        <div>
+            {{recoverCtrl.errorMessage}}
+        </div>
+    </div>
+
+</div>
+
+

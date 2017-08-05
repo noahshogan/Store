@@ -1,0 +1,41 @@
+
+<div class="login-container" ng-controller="mainController as mainCtrl">
+    <ul id="cd-gallery-items" class="cd-container">
+        <h1>Top 5 Products</h1>
+        <div class="card card-1" ng-repeat="p in mainCtrl.top5">
+            <h2>{{p.productName}}</h2>
+            <img src="{{p.imgSrc}}" class="smallImg" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+            <br>
+            price:{{p.productPrice}} $
+            <br/>
+            <form ng-show="mainCtrl.userService.isLoggedIn" name="prod">
+                <input name="quantity" ng-model="quantity" placeholder="Enter quantity">
+                <div ng-show="prod.quantity.$dirty">$TotalPrice:{{quantity*p.productPrice}}</div>
+                <div ng-show="!prod.quantity.$dirty">TotalPrice: $0 </div>
+                <br/>
+                <button ng-click="mainCtrl.addToCart(p, quantity);" class="button">add to cart</button>
+            </form>
+            <br/>
+        </div>
+    </ul> <!-- cd-gallery-items -->
+
+    <ul ng-show="mainCtrl.userService.isLoggedIn" id="cd-gallery-items2" class="cd-container">
+    <h1 ng-show="mainCtrl.userService.isLoggedIn">Recommanded for You</h1>
+        <div class="card card-1" ng-repeat="p in mainCtrl.userService.recommandedProducts">
+            <h2>{{p.productName}}</h2>
+            <img src="{{p.imgSrc}}" class="smallImg" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+            <br>
+            price:{{p.productPrice}} $
+            <br/>
+            <form name="prod">
+                <input name="quantity" ng-model="quantity" placeholder="Enter quantity">
+                <div ng-show="prod.quantity.$dirty">$ TotalPrice:{{quantity*p.productPrice}} </div>
+                <div ng-show="!prod.quantity.$dirty">TotalPrice: $0 </div>
+                <br/>
+                <button ng-click="mainCtrl.addToCart(p, quantity);">add to cart</button>
+            </form>
+            <br/>
+        </div>
+    </ul> <!-- cd-gallery-items -->
+
+</div>

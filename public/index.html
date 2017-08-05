@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+    <script src="angularScripts/angular.js"></script>
+    <link rel="stylesheet" type="text/css" href="css.css" />
+    <script src="app.js"></script>
+    <script src="views/Products.js"></script>
+    <script src="views/login.js"></script>
+    <script src="views/SignUp.js"></script>
+    <script src="views/purches.js"></script>
+    <script src="views/HistoryOfPurchases.js"></script>
+    <script src="views/UserService.js"></script>
+    <script src="views/CookieService.js"></script>
+    <script src="views/Search.js"></script>
+    <script src="node_modules/ng-dialog/js/ngDialog.js"></script>
+    <link rel="stylesheet" href="node_modules/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="node_modules/ng-dialog/css/ngDialog-theme-default.css">
+
+    <script type="text/javascript" src="angularScripts/angular-route.js"></script>
+    <script type="text/javascript" src="angularScripts/angular-local-storage.min.js"></script>
+
+
+</head>
+<body>
+<div ng-controller="mainController as mainCtrl">
+    <header>
+        <div id="logo" class="logotext"><img src="img/cd-logo.svg" alt="Homepage">
+            <div ng-show="mainCtrl.userService.isLoggedIn">
+                Hello: {{mainCtrl.userService.User[0].username}} &nbsp Last Log in : {{mainCtrl.userService.User[0].lastLogInDate}}
+            </div>
+            <div ng-hide="mainCtrl.userService.isLoggedIn">
+                Hello: guest
+            </div>
+        </div>
+
+        <div id="cd-hamburger-menu"><a class="cd-img-replace" href="#0">Menu</a></div>
+        <img ng-show="mainCtrl.userService.isLoggedIn" id="cd-cart-trigger" class="cd-img-replace" src="img/cart.JPG">
+    </header>
+    <nav id="main-nav">
+        <ul>
+            <li><a ng-href="#/">Home</a></li>
+            <li><a ng-href="#/About">About</a></li>
+            <li ng-show="mainCtrl.userService.isLoggedIn">
+                <a ng-href="#/" ng-click="mainCtrl.logOff()">logOff</a>
+            </li>
+            <li ng-hide="mainCtrl.userService.isLoggedIn">
+                <a ng-href="#/login">Login</a>
+            </li>
+            <li ng-hide="mainCtrl.userService.isLoggedIn">
+                <a ng-href="#/SignUp">Sign-Up</a>
+            </li>
+            <li  ng-show="mainCtrl.userService.isLoggedIn">
+                <a ng-href="#/products">Products</a>
+            </li>
+            <li ng-show="mainCtrl.userService.isLoggedIn">
+                <a ng-href="#/Search">Search</a>
+            </li>
+        </ul>
+    </nav>
+    <div ng-show="mainCtrl.userService.isLoggedIn">
+        UserName: {{mainCtrl.userService.User[0].username}}<br/>
+        FirstName: {{mainCtrl.userService.User[0].firstname}}<br/>
+        lastName: {{mainCtrl.userService.User[0].lastname}}<br/>
+
+    </div>
+<br>
+<br>
+    <main>
+        <ng-view></ng-view>
+    </main>
+    <div id="cd-shadow-layer"></div>
+
+    <div id="cd-cart">
+        <h2>Cart</h2>
+        <ul class="cd-cart-items">
+            <li ng-repeat="p in mainCtrl.userService.Cart">
+                <span class="cd-qty">{{p.quantity}}x</span> {{p.productName}}
+                <div class="cd-price">${{p.productPrice}}</div>
+                <a ng-href="javascript:void(0)" class="cd-item-remove" ng-click="mainCtrl.removeFromCart(p)">Remove</a>
+            </li>
+        </ul> <!-- cd-cart-items -->
+
+        <div class="cd-cart-total" >
+            <p>Total <span>${{mainCtrl.userService.totalPrice}}</span></p>
+        </div> <!-- cd-cart-total -->
+
+        <a href="#/Purchase" class="checkout-btn">Checkout</a>
+
+        <p class="cd-go-to-cart"><a ng-href="#/HistoryOfPurchases">History Of Purchases</a></p>
+    </div> <!-- cd-cart -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/main.js"></script> <!-- Gem jQuery -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+<h2>Products</h2>
+<div class="Products-container" ng-controller="producsController as productsCtrl">
+    <div class="Products">
+        <div class="form-group">
+            <label>order by</label>
+            <select ng-model="productsCtrl.orderby" ng-change="productsCtrl.changeOrderBy" name="category1">
+                <option value="productName">Name</option>
+                <option value="productPrice">Price</option>
+                <option value="productId">Id</option>
+                <option value="timesBought">Popular</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>select Categoty</label>
+            <select ng-model="productsCtrl.sortCatId" name="category1" id="category1">
+                <option value>all</option>
+                <option ng-repeat="c in productsCtrl.categotys.data" value="{{c.categoryId}}">{{c.categoryName}}</option>
+            </select>
+        </div>
+        <ul id="cd-gallery-items" class="cd-container">
+            <h1>Top 5 Products</h1>
+            <div class="card card-1" ng-form="prod" ng-repeat="p in productsCtrl.products | orderBy:productsCtrl.orderby:reverse | filter:{productId:productsCtrl.sortCatId||undefined} |startFrom:productsCtrl.currentPage*productsCtrl.pageSize | limitTo:productsCtrl.pageSize">
+                <h2>{{p.productName}}</h2>
+                <img src="{{p.imgSrc}}" class="smallImg" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+                <br>
+                price:{{p.productPrice}} $
+                <br/>
+                <form name="prod">
+                    <input name="quantity" ng-model="quantity" placeholder="Enter quantity">
+                    <div ng-show="prod.quantity.$dirty">TotalPrice:{{quantity*p.productPrice}} $</div>
+                    <div ng-show="!prod.quantity.$dirty">TotalPrice: 0 $</div>
+                    <br/>
+                    <button ng-click="mainCtrl.addToCart(p, quantity);">add to cart</button>
+                </form>
+                <br/>
+            </div>
+        </ul>
+
+
+
+
+
+        <button ng-disabled="productsCtrl.currentPage == 0" ng-click="productsCtrl.currentPage=productsCtrl.currentPage-1">
+            Previous
+        </button>
+        {{productsCtrl.currentPage+1}}/{{productsCtrl.numberOfPages()}}
+        <button ng-disabled="productsCtrl.currentPage >= productsCtrl.products.length/productsCtrl.pageSize - 1" ng-click="productsCtrl.currentPage=productsCtrl.currentPage+1">
+            Next
+        </button>
+
+
+    </div>
+</div>
+
+

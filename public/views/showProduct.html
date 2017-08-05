@@ -1,0 +1,44 @@
+
+    <table ng-form="prod"  >
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                {{prodctForDialog.productName}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Picture:
+            </td>
+            <td>
+                <a href="{{prodctForDialog.imgSrc}}"><img src="{{prodctForDialog.imgSrc}}" class="bigImg"></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Category:
+            </td>
+            <td>
+                {{prodctForDialog.categoryName}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Price:
+            </td>
+            <td>
+                {{prodctForDialog.productPrice}} $
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Description:
+            </td>
+            <td>
+                {{prodctForDialog.discription}} $
+            </td>
+        </tr>
+
+    </table>

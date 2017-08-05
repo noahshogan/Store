@@ -1,0 +1,20 @@
+<div class="cd-container" ng-controller="historyController as historyCtrl">
+    History Of Purchases
+    <div ng-repeat="history in historyCtrl.history">
+        Purchase Id:{{history.purchaseId}}<br>
+        Total paid:{{history.amountOfMony}}<br>
+        Deliver Date:{{history.deliverDate}}<br>
+        Purchase Date:{{history.purchaseDate}}<br>
+        items:{{array}}<br>
+        <div class="card card-1" ng-repeat="p in history.array" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+            <h2>{{p.productName}}</h2>
+            <img src="{{p.imgSrc}}" class="smallImg" ng-click="mainCtrl.openDialog(p)" style="cursor:pointer;">
+            <br>
+            price:{{p.productPrice}} $
+            <br/>
+            quantity:{{p.quantity}}
+            <br/>
+        </div>
+        <br>
+    </div>
+</div>

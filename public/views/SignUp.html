@@ -1,0 +1,133 @@
+
+
+
+<h2>Sign Up Page</h2>
+<div class=signUp-container" ng-controller="SignUpController as SignUpCtrl">
+    <div class="signUp-form">
+        <form name="signUpForm" ng-submit="SignUpCtrl.signUp(signUpForm.$valid)" novalidate>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text"
+                       ng-model="SignUpCtrl.user.username"
+                       ng-required="true"
+                       class="form-control"
+                       name="usernameInput"
+                       placeholder="Enter Username"
+                       ng-pattern ="/^[a-zA-Z\s]*$/"
+                       required>
+                <p ng-show="signUpForm.usernameInput.$invalid && !signUpForm.usernameInput.$pristine" class="help-block">username is required</p>
+
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password"
+                       ng-model="SignUpCtrl.user.password"
+                       ng-required="true"
+                       class="form-control"
+                       name="passwordInput"
+                       placeholder="Enter Password"
+                       ng-pattern ="/^[a-zA-Z0-9._-]+$/"
+                       ng-keyup="SignUpCtrl.chackPassValid()"
+                       required>
+                <p ng-show="SignUpCtrl.passWordmsgBoll" class="help-block"><div ng-repeat="str in SignUpCtrl.passWordmsg">{{str}}</div></p>
+            </div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text"
+                       ng-model="SignUpCtrl.user.firstName"
+                       ng-required="true"
+                       class="form-control"
+                       name="firstNameInput"
+                       placeholder="Enter First Name"
+                       ng-minlength="3"
+                       ng-maxlength="8"
+                       required>
+                <p ng-show="signUpForm.firstNameInput.$error.minlength &&signUpForm.firstNameInput.$error.maxlength && !signUpForm.firstNameInput.$pristine" class="help-block">not valid</p>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text"
+                       ng-model="SignUpCtrl.user.LastName"
+                       ng-required="true"
+                       class="form-control"
+                       name="LastNameInput"
+                       placeholder="Enter Last Name"
+                       ng-minlength="3"
+                       ng-maxlength="8"
+                       required>
+                <p ng-show="signUpForm.LastNameInput.$error.minlength &&signUpForm.LastNameInput.$error.maxlength && !signUpForm.LastNameInput.$pristine" class="help-block">first</p>
+            </div>
+            <div class="form-group">
+                <label>Countries</label>
+                <select ng-model="SignUpCtrl.user.country" name="repeatSelect" id="repeatSelect" required>
+                    <option ng-repeat="c in SignUpCtrl.countries " value="{{c.textContent}}">{{c.textContent}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email"
+                       ng-model="SignUpCtrl.user.email"
+                       ng-required="true"
+                       class="form-control"
+                       name="emailInput"
+                       placeholder="Enter email"
+                       required>
+            </div>
+            <div class="form-group">
+                <label>favorite category1</label>
+                <select ng-model="SignUpCtrl.user.cat1" name="category1" id="category1" required>
+                    <option value>Select Category</option>
+                    <option  ng-repeat="c in SignUpCtrl.categotys.data" value="{{c.categoryId}}" >{{c.categoryName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>favorite category2</label>
+                <select ng-model="SignUpCtrl.user.cat2" name="category2" id="category2" required>
+                    <option value>Select Category</option>
+                    <option  ng-repeat="c in SignUpCtrl.categotys.data" value="{{c.categoryId}}" >{{c.categoryName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>favorite category3</label>
+                <select ng-model="SignUpCtrl.user.cat3" name="category3" id="category3" required>
+                    <option value>Select Category</option>
+                    <option  ng-repeat="c in SignUpCtrl.categotys.data" value="{{c.categoryId}}" >{{c.categoryName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>What hospital were you born in?</label>
+                <input type="text"
+                       ng-model="SignUpCtrl.user.ANSWER1"
+                       ng-required="true"
+                       class="form-control"
+                       name="ANSWER1Input"
+                       placeholder="Enter Answer"
+
+                       required>
+            </div>
+            <div class="form-group">
+                <label>What was the name of your first teacher?</label>
+                <input type="text"
+                       ng-model="SignUpCtrl.user.ANSWER2"
+                       ng-required="true"
+                       class="form-control"
+                       name="ANSWER2Input"
+                       placeholder="Enter Answer"
+                       required>
+            </div>
+            <input type="submit"
+                   class="btn btn-success btn-lg"
+                   value="Register"
+                   ng-disabled="signUpForm.$invalid&&!signUpForm.repeatSelect.$error.required
+                   &&!signUpForm.category1.$error.required
+                    &&!signUpForm.category2.$error.required
+                    &&!signUpForm.category3.$error.required">
+        </form>
+        <br/><br/>
+
+        <div>
+            {{loginCtrl.errorMessage}}
+        </div>
+    </div>
+
+</div>
